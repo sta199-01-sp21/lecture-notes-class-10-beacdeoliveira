@@ -152,6 +152,8 @@ two_draw_results
 How can we add a variable to `two_draw_results` to see if `draw_1` and `draw_2`
 match?
 
+You add the variable using the "mutate" command. 
+
 ```{r identify_matches}
 two_draw_results <- two_draw_results %>% 
   mutate(color_match = draw_1 == draw_2)
@@ -173,20 +175,30 @@ Suppose you roll two fair six-sided dice. Which has a higher probability:
 the square of dice roll 1 is equal to dice roll 2; or the absolute value of the
 difference between dice roll 1 and dice roll 2 is equal to 4.
 
+The square of dice roll 1 is equal to dice roll 2.
+
 Perform a simulation to compute this empirical probability.
 
 Write down your guess to the answer before you calculate it.
 
 ```{r simulate_rolls}
-
+roll_results <- tibble(
+  die_1 = replicate(n = 10000, expr = sample(1:6, size =1)),
+  die_2 = replicate(n = 10000, expr = sample(1:6, size = 1)
+))
 ```
 
 ```{r identify_events}
-
+roll_results <- roll_results %>% 
+  mutate(number_match = die_1 ^ 2 == die_2,
+         abs_value = abs(die_1 - die_2) == 4)
+roll_results
 ```
 
 ```{r summarize_rolls}
-
+roll_results %>% 
+  summarise(event_1_prop = mean(number_match),
+            event_2_prop = mean(abs_value))
 ```
 
 ## Additional Resources-please look at before Weds.
