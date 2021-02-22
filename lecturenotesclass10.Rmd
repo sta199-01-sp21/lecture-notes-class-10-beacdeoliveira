@@ -94,6 +94,7 @@ How about white?
 We can simulate this "drawing" with the `sample()` function.
 
 ```{r sample}
+set.seed(100)
 sample(marbles, size = 1)
 ```
 
@@ -107,7 +108,7 @@ of eight marbles each time. This way we can easily simulate our marble-drawing
 experiment.
 
 ```{r simulate_draws}
-draw_results <- sample(marbles, size = 10000, replace = TRUE)
+draw_results <- sample(marbles, size = 1000000, replace = TRUE)
 ```
 
 ```{r summarize_draws}
@@ -116,6 +117,8 @@ prop.table(counts)
 ```
 
 How close is this value to the "true" probability?
+
+This is very close to the "true" probability. Almost identical.
 
 **To summarize our process:**
 
@@ -132,6 +135,8 @@ color if we make two draws with replacement? We haven't discussed how to
 compute this theoretically yet, but this is what computers are good at.
 
 Before we do this, what is your guess as to what the probability will be?
+
+It depends on the color of the marble. I'd roughly guess 35%.
 
 We'll still use `sample()` to run our simulation many times, but we'll
 use `dplyr` functions to compute the relative frequencies.
